@@ -1,0 +1,46 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+#TC:O(n)
+#SC: O(n)
+class Solution:
+    'approach: BFS method if res len==level then append node val'
+    def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
+    #     if root is None:
+    #         return []
+    #     res=[]
+    #     queue=[]
+    #     queue.append((root,0))  
+    #    # queue.append(root)
+
+    #     while queue:
+    #         #level=len(queue)
+    #         node, level=queue.pop() #pop # Pop the first node and its level from the queue
+    #         if level==len(res):
+    #             res.append(node.val)
+    #             # for i in range(level):
+    #         #     node=queue.popleft()
+                
+    #         if node.left:
+    #             queue.append((node.left, level+1))
+
+    #         if node.right:
+    #             queue.append((node.right, level+1))
+    #     return res
+   
+        res=[]
+        def dfs(root,level):
+            if root is None:
+                return
+            if level==len(res):
+                res.append(root.val)
+            else:
+                res[level]=root.val
+            dfs(root.left,level+1)
+            dfs(root.right,level+1)
+        dfs(root,0)
+        return res
